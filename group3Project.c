@@ -107,13 +107,64 @@ int shortestDist (char matrix[R][C])
         }
     }
     
-    // BFS ON GRID CELLS //
+    enqueue (sourceElement);
+    visitedElements [sourceElement.row][sourceElement.column] = true ;
 
+    while (!isEmpty())
+    {
+        struct queueElement qe = peek();
+        dequeue();
 
+        if (matrix[qe.row][qe.column] == 'P'){
+            return qe.distFromSource;
+      } 
 
-   
-    
-    
+        // moving up the grid
+
+        if (qe.row - 1 >= 0 && visitedElements[qe.row - 1][qe.column] == false)
+        {
+            qe.row = qe.row - 1;
+            qe.column = qe.column;
+            qe.distFromSource = qe.distFromSource +1 ;
+            enqueue(qe);
+            visitedElements [qe.row - 1][qe.column] = true;
+        }
+
+        // moving down //
+
+        else if (qe.row + 1 < R && visitedElements[qe.row + 1][qe.column] == false)
+        {
+            qe.row = qe.row + 1;
+            qe.column = qe.column;
+            qe.distFromSource = qe.distFromSource +1 ;
+            enqueue(qe);
+            visitedElements [qe.row + 1][qe.column] = true;
+
+        }
+
+        // moving left //
+
+        else if (qe.column-1 >=0 && visitedElements[qe.row][qe.column - 1] == false)
+        {
+            qe.row = qe.row;
+            qe.column = qe.column - 1;
+            qe.distFromSource = qe.distFromSource +1 ;
+            enqueue(qe);
+            visitedElements [qe.row][qe.column - 1] = true;
+
+        }
+
+        // moving right
+        else if (qe.column+1 < C && visitedElements[qe.row][qe.column + 1] == false)
+        {
+            qe.row = qe.row;
+            qe.column = qe.column + 1;
+            qe.distFromSource = qe.distFromSource +1 ;
+            enqueue(qe);
+            visitedElements [qe.row][qe.column + 1] = true;
+        }
+    }
+
     return -1; 
 }
 
