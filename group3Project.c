@@ -2,7 +2,7 @@
 *  RAHUL ROY ( ID : 172014022)
 *  NICHOLAS TONY GOMES (ID : 172014005)
 *  MUHTASIR SHAFKAT  (ID : 172014023)
-*
+*  RUPOM BISWAS (ID : 172014043)
 *
 */
 
@@ -51,7 +51,32 @@ bool isFull (){
     return q.itemCount == max;
 }
 
-// BFS APPLICATION // 
+void enqueue (struct queueElement object){
+    if(!isFull()) 
+    {   
+        if(q.rear == (max)-1) 
+        {
+            q.rear = -1;
+        }
+        q.queueArray[++q.rear] = object ;
+        q.itemCount++;
+    }
+}
+
+void dequeue ()
+{
+    struct queueElement object = q.queueArray [q.front++];
+    if (q.front == (max))
+    {
+        q.front = 0;
+    }
+    q.itemCount -- ;
+}
+
+
+
+
+/************** BFS APPLICATION   ****************/ 
 
 int shortestDist (char matrix[R][C])
 {
@@ -98,10 +123,36 @@ int shortestDist (char matrix[R][C])
 
 int main ()
 {
+    int testCaseNum, Row = 0, Column = 0;
+    q.front = 0 ;
+    q. rear = -1 ;
+
+    printf ("Enter number of test cases:\n");
+    scanf ("%d", &testCaseNum);
+  
+    max = Row*Column ;
+    char matrix [Row][Column];
    
+    //try with test case 1 //
     
-
-
+    for (int z = 1 ; z <= testCaseNum; z++)
+    {
+      printf ("testCaseNum :[%d]\n", z);
+      printf ("Enter rows and columns:\n");
+      scanf ("%d%d", &Row, &Column);
+      printf ("\nEnter grid elements.\n");
+      for (int p = 0 ; p < Row ; p++)
+      {
+          for (int q = 0 ; q < Column ; q++)
+          {
+              printf ("[%d][%d] : ", p, q);
+              scanf ("%c ", &matrix[p][q]);
+          }
+      }
+    printf ("\n");
+    }
+    printf ("%d", shortestDist(matrix));
+    
     return 0 ;
 }
 
