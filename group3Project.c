@@ -1,7 +1,7 @@
 /* GROUP 3 
 *  RAHUL ROY ( ID : 172014022)
 *  NICHOLAS TONY GOMES (ID : 172014005)
-*
+*  MUHTASIR SHAFKAT  (ID : 172014023)
 *
 *
 */
@@ -13,25 +13,43 @@
 // variable declaration //
 int max, R, C;
 
-
+/*  Every Matrix cell is considered a queue element with 
+*   these variables.
+*/
 struct queueElement
 {
-
-
+    int row;
+    int column ;
+    int distFromSource;
 }qe;
 
-
-
+// An array implementation of queue, with the following properties
 struct queue
 {
+    int front;
+    int rear ;
+    int itemCount;
+    bool isEmpty;
+    bool isFull;
+    struct queueElement queueArray[];    // the queue holds elements from the queueElement struc. 
     
 }q;
 
-
 // QUEUE OPERATIONS  //
 
+struct queueElement peek ()
+{
+    return q.queueArray[q.front];
+}
 
+bool isEmpty ()
+{
+    return q.itemCount == 0;
+}
 
+bool isFull (){
+    return q.itemCount == max;
+}
 
 // BFS APPLICATION // 
 
@@ -80,9 +98,11 @@ int shortestDist (char matrix[R][C])
 
 int main ()
 {
+   
+    
 
 
-  return 0 ;
+    return 0 ;
 }
 
 
